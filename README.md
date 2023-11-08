@@ -1,16 +1,17 @@
-# instock
+# Tugas 7
 
-A new Flutter project.
+**1. Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?**
+Stateless Widget merupakan widget yang tidak memiliki state internal untuk dikelola sehingga tidak bergantung pada data eksternal atau input pengguna dan tidak mengubah tampilannya saat program berjalan. Hal ini menyebabkan stateless widget bersifat immutable atau tidak dapat diubah setelah widget dibuat. Stateless widget juga bersifat idempotent atau selalu mengembalikan output yang sama untuk setiap input.
 
-## Getting Started
+Kebalikan dari stateless widget, Stateful Widget adalah widget yang memiliki state internal untuk dikelola sehingga bergantung pada data eksternal atau input pengguna. Oleh karena itu, stateful widget bersifat mutable dan non-idempotent.
 
-This project is a starting point for a Flutter application.
+**2. Sebutkan seluruh widget yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.**
+- MyHomePage, mengatur layout halaman utama dan mendefinisikan ShopItem
+- Scaffold, untuk struktur visual dasar yang mencakup AppBar, Body, dan lain-lain.
+- AppBar, menampilkan AppBar di atas layar
+- SingleChildScrollView, memungkinkan konten untuk dapat di scroll
+- Padding, memberikan padding di sekitar widget
+- Text, menampilkan string teks
+- 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**3. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)**
