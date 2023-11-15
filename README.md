@@ -39,27 +39,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'InStock App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
@@ -74,11 +58,6 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
   final List<ShopItem> items = [
     ShopItem("Lihat Item", Icons.checklist),
     ShopItem("Tambah Item", Icons.add_shopping_cart),
@@ -87,12 +66,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -102,17 +75,14 @@ class MyHomePage extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        // Widget wrapper yang dapat discroll
         child: Padding(
           padding: const EdgeInsets.all(10.0), // Set padding dari halaman
           child: Column(
-            // Widget untuk menampilkan children secara vertikal
             children: <Widget>[
               const Padding(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'PBP Shop', // Text yang menandakan toko
+                  'InStock App', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -120,9 +90,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Grid layout
               GridView.count(
-                // Container pada card kita.
                 primary: true,
                 padding: const EdgeInsets.all(20),
                 crossAxisSpacing: 10,
@@ -130,7 +98,6 @@ class MyHomePage extends StatelessWidget {
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 children: items.map((ShopItem item) {
-                  // Iterasi untuk setiap item
                   return ShopCard(item);
                 }).toList(),
               ),
@@ -195,3 +162,231 @@ class ShopCard extends StatelessWidget {
 }
 
 ```
+
+# Tugas 8
+**1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!**
+
+Metode Navigator.push() akan menambahkan route kedalam suatu stack yang dikelola oleh Navigator sehingga setiap penambahan route akan diletakan di posisi paling atas stack. Oleh karena itu, pengguna masih dapat mengakses halaman sebelumnya.
+
+```dart
+Navigator.push(context,
+    MaterialPageRoute(builder: (context) => const ShopFormPage()));
+```
+
+Berbeda dengan Navigator.push(), pushReplacement() akan menambahkan route dan pada saat yang sama menghapus route yang sedang ditampilkan tanpa mengubah kondisi elemen stack yang ada di bawahnya. Metode ini berguna saat kita ingin menggati konten halaman aplikasi sepenuhnya dengan halaman baru.
+
+```dart
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(
+    builder: (context) => MyHomePage(),
+  ));
+```
+
+**2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!**
+
+- Single-child layout widgets: widget yang mengatur tata letak 1 buah widget child. Contohnya seperti `Container` yang dapat memberikan padding, margin, dan dekorasi lain pada widget childnya. `Center` juga dapat mengatur peletakan widget childnya menjadi di tengah.
+- Multi-child layout widgets: widget yang mengatur tata letak >1 buah widget childnya. Seperti `Row` dan `Column`
+- Sliver widgets: widget yang mengatur tata letak dalam konteks scrollable area. Seperti `SliverList` dan `SliverGrid` yang dapat menampilkan list atau grid yang dapat di scroll.
+
+**3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!**
+
+- TextForm field Nama Item untuk memasukkan nama item yang ingin ditambahkan. Elemen input ini memiliki validasi tidak boleh kosong.
+- TextForm field Jumlah Item untuk memasukkan jumlah item yang ingin ditambahkan. Elemen input ini memiliki validasi input harus angka
+- TextForm field Deskripsi untuk memberikan deskripsi terkait item yang ingin ditambahkan. Sama seperti field nama item, elemen input ini memiliki validasi tidak boleh kosong.
+
+**4. Bagaimana penerapan clean architecture pada aplikasi Flutter?**
+
+Penerapan clean architecture melibatkan pemisahan kode menjadi beberapa lapisan berbeda yang memiliki tanggung jawab tertentu. Cara menerapkan clean architecture dapat dilakukan dengan membuat 3 layer utama:
+1. Data: layer ini bertanggung jawab dalam mendapatkan data dan dapat berbentuk API calls kepada server atau local database
+2. Domain: layer tanpa dependensi dengan layer lain yang bertugas dalam business logic dari aplikasi.
+3. Feature: layer presentasi aplikasi dan merupakan framework dengan kebergantungan paling besar karena mengandung interface dan event handlernya
+
+**5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)**
+
+1. Pada direktori `lib` saya menambahkan file baru dengan nama `shoplist_form.dart` yang didalamnya dituliskan kode sebagai berikut. 
+```dart
+import 'package:flutter/material.dart';
+import 'package:instock/widgets/left_drawer.dart';
+import 'package:instock/model/models.dart';
+
+List<Item> itemList = [];
+
+class ShopFormPage extends StatefulWidget {
+  const ShopFormPage({super.key});
+
+  @override
+  State<ShopFormPage> createState() => _ShopFormPageState();
+}
+
+class _ShopFormPageState extends State<ShopFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  String _name = "";
+  int _amount = 0;
+  String _description = "";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Form Tambah Produk',
+          ),
+        ),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+      ),
+      drawer: const LeftDrawer(),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Nama Produk",
+                labelText: "Nama Produk",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _name = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return "Nama tidak boleh kosong!";
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Jumlah",
+                labelText: "Jumlah",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _amount = int.parse(value!);
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return "Jumlah tidak boleh kosong!";
+                }
+                if (int.tryParse(value) == null) {
+                  return "Jumlah harus berupa angka!";
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Deskripsi",
+                labelText: "Deskripsi",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _description = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return "Deskripsi tidak boleh kosong!";
+                }
+                return null;
+              },
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                ),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    Item newItem = Item(
+                      nama: _name,
+                      jumlah: _amount,
+                      deskripsi: _description,
+                    );
+                    itemList.add(newItem);
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Produk berhasil tersimpan'),
+                          content: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Nama: $_name'),
+                                Text('Jumlah: $_amount'),
+                                Text('Deskripsi: $_description'),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: const Text('OK'),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                  _formKey.currentState!.reset();
+                },
+                child: const Text(
+                  "Save",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ])),
+      ),
+    );
+  }
+}
+
+```
+
+2. Agar halaman form yang telah dibuat sebelumnya dapat diakses, saya menambahkan navigator pada drawer dan pada main page
+```dart
+          ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Tambah Item'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShopFormPage(),
+                  ));
+            },
+          ),
+```
+3. Setelah user menambahkan item, item yang terdaftar dapat dilihat melalui halaman Lihat Item. Untuk memulainya, saya membuat file baru dengan nama `models.dart` yang berisi class yang akan menyimpan data Item. Kemudian, saya membuat file baru lagi dengan nama `list_item.dart` untuk menampilkan data yang tersimpan. Selain itu, saya membuat navigator dari drawer dengan nama `Lihat daftar item` dan di main page pada tombol `Lihat Item`
