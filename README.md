@@ -390,3 +390,42 @@ class _ShopFormPageState extends State<ShopFormPage> {
           ),
 ```
 3. Setelah user menambahkan item, item yang terdaftar dapat dilihat melalui halaman Lihat Item. Untuk memulainya, saya membuat file baru dengan nama `models.dart` yang berisi class yang akan menyimpan data Item. Kemudian, saya membuat file baru lagi dengan nama `list_item.dart` untuk menampilkan data yang tersimpan. Selain itu, saya membuat navigator dari drawer dengan nama `Lihat daftar item` dan di main page pada tombol `Lihat Item`
+
+
+# Tugas 9
+**1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?**
+
+Pengambilan data JSON dapat dilakukan tanpa membuat model terlebih dahulu dengan cara mem-parsing data JSON dan mengaksesnya secara langsung. Namun, pembuatan model akan membantu penyusunan kode dengan lebih rapi sehingga apabila terjadi suatu kesalahan akan lebih mudah diperiksa
+
+**2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.**
+
+CookieRequest adalah class yang digunakan untuk mengelola cookies dalam request HTTP. Pada flutter, instance cookies perlu dibagikan ke semua komponen untuk beberapa alasan, diantaranya agar user tetap bisa masuk meskipun melakukan navigasi ke halaman lain. Selain itu, instance cookies dapat menjaga konsistensi tiap halaman untuk memenuhi preferensi user.
+
+**3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.**
+
+- membuat model untuk membuat data JSON
+- menambahkan dependensi HTTP untuk memperbolehkan akses internet
+- melakukan fetch data
+- menampilkan data dengan widget `FutureBuilder`
+
+**4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.**
+
+- buat metode login pada app authentication django akan membandingkan username dan password dari input user dan database
+- pada proyek flutter, tambahkan CookieRequest ke semua child widget
+- buat file login.dart
+
+**5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.**
+
+- Widget `TextField`: agar pengguna memasukkan teks ketika melakukan suatu inpt, misalnya nama pengguna dan kata sandi.
+- Widget `FutureBuilder`: Widget untuk membangun widget secara asinkron. Widget ini digunakan untuk mengelola status loading, error, dan data yang tersedia.
+- Widget `ListView.builder`: untuk membuat daftar yang dapat discroll.
+- Widget `Column`: untuk menyusun komponen secara vertikal
+- widget `SizedBox`: untuk menambahkan ruang vertikal
+
+
+**6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).**
+
+1. melakukan integrasi dan membuat metode login dan logout pada proyek django, setelah itu membuat file login.dart pada proyek flutter
+2. menambahkan CookiesRequest pada setiap child widget
+3. membuat model dari data json proyek django dan mengcopy kode tersebut pada file baru bernama models.dart
+4. Agar data yang tersimpan dapat dilihat user, buat list_item.dart yang akan menampilkan data json yang telah tersimpan

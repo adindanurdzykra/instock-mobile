@@ -70,10 +70,9 @@ class LeftDrawer extends StatelessWidget {
             onTap: () {
               // Route menu ke halaman to do
               Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ListItemPage(itemList: itemList),
-                  ));
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
+              );
             },
           ),
         ],
