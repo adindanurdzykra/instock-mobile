@@ -13,7 +13,7 @@ class LeftDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.indigo,
+              color: Color.fromARGB(255, 207, 19, 129),
             ),
             child: Column(
               children: [
@@ -71,7 +71,7 @@ class LeftDrawer extends StatelessWidget {
               // Route menu ke halaman to do
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ProductPage()),
+                MaterialPageRoute(builder: (context) => const ItemPage()),
               );
             },
           ),

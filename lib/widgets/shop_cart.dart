@@ -21,7 +21,7 @@ class ShopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Material(
-      color: Colors.indigo,
+      color: Color.fromARGB(255, 180, 15, 111),
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () async {
@@ -37,10 +37,10 @@ class ShopCard extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const ShopFormPage()));
           } else if (item.name == "Lihat Item") {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProductPage()));
+                MaterialPageRoute(builder: (context) => const ItemPage()));
           } else if (item.name == "Logout") {
-            final response = await request.logout(
-                "http://127.0.0.1:8000/auth/logout/");
+            final response =
+                await request.logout("http://127.0.0.1:8000/auth/logout/");
             String message = response["message"];
             if (response['status']) {
               String uname = response["username"];

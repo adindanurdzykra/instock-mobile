@@ -29,7 +29,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
             'Form Tambah Produk',
           ),
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Color.fromARGB(255, 207, 19, 129),
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),

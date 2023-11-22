@@ -18,7 +18,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text(
           'InStock App',
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Color.fromARGB(255, 207, 19, 129),
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
